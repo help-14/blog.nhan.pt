@@ -1,7 +1,7 @@
 ---
 layout: home.njk
 title: NhanPT's Blog
-description: Test
+description: My blog on random things IT related
 categories:
   - dotnet
   - linux
