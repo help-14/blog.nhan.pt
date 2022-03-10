@@ -1,0 +1,26 @@
+{% extends "layout.njk" %}
+
+{% block blockContent %}
+
+<div id='footer' class="row"></div>
+<div class="row">
+    <div class="col-md-12 col-md-offset-0 text-center animate-box">
+        <h2>{{ title }}</h2>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="work-entry animate-box">
+            <a class="work-img" style="background-image: url({{ cover }});"></a>
+            <div class="col-md-8 col-md-offset-2">
+                <div class="desc">
+                    {{ content }}
+                    <br /><br />
+                    <p class="read"><a href="#">{{ date | date('HUMAN_DATE', 'vi') }}</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

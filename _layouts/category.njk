@@ -1,0 +1,47 @@
+{% extends "layout.njk" %}
+
+{% block blockContent %}
+
+<div id='footer' class="row"></div>
+<div class="row text-center">
+    <h2 class="bold">{{ title }}</h2>
+</div>
+<div class="row">
+    <div class="col-md-12 col-md-offset-0 text-center animate-box">
+        <h2>{{ description }}</h2>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="work-entry animate-box">
+            <div class="col-md-8 col-md-offset-2">
+                <div class="desc">
+                    <div class="row">
+                        {% for post in search.pages(category) %}
+                        <div class="col-md-12">
+                            <div class="work-entry animate-box">
+                                <a href="work.html" class="work-img" style="background-image: url(images/work-1.jpg);">
+                                    <div class="display-t">
+                                        <div class="work-name">
+                                            <h2>{{ post.data.title }}</h2>
+                                            <p>{{ post.data.description }}</p>
+                                        </div>
+                                    </div>
+                                </a>
+                                <div class="col-md-4 col-md-offset-4">
+                                    <div class="desc">
+                                        <p>{{ post.data.description }}</p>
+                                        <p class="read"><a href="#">Read more</a></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

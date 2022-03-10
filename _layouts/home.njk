@@ -1,0 +1,47 @@
+{% extends "layout.njk" %}
+
+{% block blockContent %}
+
+<div class="row text-center">
+    <h2 class="bold">My Blog</h2>
+</div>
+
+{% for category in categories %}
+<div id='footer' class="row"></div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="rotate">
+            <a href="/{{ category }}">
+                <h2 class="heading ">{{ category }}</h2>
+            </a>
+        </div>
+    </div>
+</div>
+<div class="row animate-box">
+    <div class="owl-carousel1">
+        {% for post in search.pages(category) | slice(9) | first %}        
+        <div class="item">
+            <div class="col-md-12">
+                <div class="article">
+                    <a href="{{ post.data.url }}" class="blog-img">
+                        <img class="img-responsive" src="{{ post.data.cover }}">
+                        <div class="overlay"></div>
+                        <div class="link">
+                            <span class="read">Đọc thêm</h2>
+                        </div>
+                    </a>
+                    <div class="desc">
+                        <span class="meta">{{ post.data.date | date('SHORT_FORMAT', 'vi') }}</span>
+                        <h2><a href="{{ post.data.url }}">{{ post.data.title }}</a></h2>
+                        <p>{{ post.data.description }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% else %}
+{% endfor %}
+
+{% endblock %}
