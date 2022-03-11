@@ -39,3 +39,91 @@ Khi trỏ domain vào đây thì mọi người nhớ chỉnh cả `A` record v�
 ## Grub
 
 Grub có mội lỗi nếu cắm USB hoặc SSD thứ 2 thì ko boot được, mọi người tạm tháo usb ra để vào, sau đó sửa file `/boot/grub/grub.cfg`. Sửa `set root='(hd0,gpt1)'` thành set `root='(hd1,gpt1)'` rồi cắm usb/ssd vào reboot bình thường.
+
+## KVM/qEMU
+
+OpenWRT không chỉ cho cài container trên Docker, mà còn có thể chạy máy ảo KVM/qEMU luôn, passthrough  usb, ssd, gpu bình thường.
+
+Đầu tiên bạn cần cài đặt các gói tin cần thiết sau:
+```
+opkg install kmod-tun qemu-bridge-helper qemu-x86_64-softmmu kmod-kvm-intel
+```
+
+Tạo 1 ổ cứng cho máy ảo, ở đây mình tạo 8Gb làm  ví dụ:
+```
+qemu-img create -f qcow2 debian.qcow2 8G
+```
+
+Chạy thử máy ảo với file cài iso:
+```
+qemu-system-x86_64 -m 512 -nic user -boot d -cdrom ./iso/debian-11.1.0-amd64-netinst.iso -hda debian.qcow2
+```
+
+Để có thể dùng VNC lúc cài đặt, bạn cần mở port đên OpenWRT từ máy tính của bạn, ví dụ OpenWRT mình chạy ở 192.168.2.1 thì mình sẽ gõ lệnh này từ máy tính, sau đó dùng VNC đến `localhost:5900`
+```
+ssh -nfNT -L 5900:127.0.0.1:5901 root@192.168.2.1
+```
+
+Sau khi cài đặt xong, nếu bạn muốn giữ MAC address không bị đổi thì dùng lệnh này:
+```
+qemu-system-x86_64 -boot d -smp 2 -m 1G -enable-kvm \
+	-cdrom ./iso/debian-11.1.0-amd64-netinst.iso \
+	-hda debian.qcow2 \
+	-device virtio-net-pci,mac=aa:88:04:fd:20:ba,netdev=br0 \
+  -netdev bridge,br=br-lan,id=br0
+```
+
+Nếu bạn muốn máy ảo khởi động cùng máy như một service của OpenWRT, bạn cần tạo file service cho thiết bị. Ví dụ ở đây mình đặt tên service là qemu chẳng hạn.
+```
+nano /etc/init.d/qemu
+```
+Điền vào file như sau:
+```
+#!/bin/sh /etc/rc.common
+ 
+START=99
+STOP=1
+ 
+qemu_pidfile="/var/run/qemu-debian.pid"
+ 
+start() {
+qemu-system-x86_64 -enable-kvm -cpu host -smp 2 -m 1G \
+	-hda /nas/VM/debian.qcow2 \
+	-device virtio-net-pci,mac=aa:88:04:fd:20:ba,netdev=br0 \
+	-netdev bridge,br=br-lan,id=br0 \
+	-qmp tcp:127.0.0.1:4444,server,nowait \
+	-daemonize &> /var/log/qemu-debian.log
+ 
+/usr/bin/pgrep qemu-system-x86_64 > $qemu_pidfile
+echo "QEMU: Started VM with PID $(cat $qemu_pidfile)."
+}
+ 
+stop() {
+echo "QEMU: Sending 'system_powerdown' to VM with PID $(cat $qemu_pidfile)."
+nc localhost 4444 <<QMP 
+{ "execute": "qmp_capabilities" } 
+{ "execute": "system_powerdown" } 
+QMP
+
+if [ -e $qemu_pidfile ]; then
+	if [ -e /proc/$(cat $qemu_pidfile) ]; then
+		echo "QEMU: Waiting for VM shutdown."
+		while [ -e /proc/$(cat $qemu_pidfile) ]; do sleep 1s; done
+		echo "QEMU: VM Process $(cat $qemu_pidfile) finished."
+	else
+		echo "QEMU: Error: No VM with PID $(cat $qemu_pidfile) running."
+	fi
+ 
+	rm -f $qemu_pidfile
+else
+	echo "QEMU: Error: $qemu_pidfile doesn't exist."
+fi
+}
+```
+```
+chmod +x /etc/init.d/qemu
+```
+
+Chú ý nếu bạn có nhiều VM cùng chạy thì nhớ đổi port `4444` thành các port khác nhau cho mỗi VM.
+
+Giờ chỉ cần lưu lại là bạn có thể điều khiển trong `System` => `Startup` trên Website của OpenWRT.
