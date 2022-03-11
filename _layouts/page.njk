@@ -14,7 +14,7 @@
             <a class="work-img" style="background-image: url({{ cover }});"></a>
             <div class="col-md-8 col-md-offset-2">
                 <div class="desc">
-                    {{ content }}
+                    {{ content | safe }}
                     <br /><br />
                     <p class="read"><a href="#">{{ date | date('HUMAN_DATE', 'vi') }}</a></p>
                 </div>
