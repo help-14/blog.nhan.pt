@@ -16,6 +16,7 @@ const nunjucks = {
 const site = lume({}, { nunjucks });
 site.ignore("README.md", "CHANGELOG.md", "node_modules");
 site.copy("assets", ".");
+site.copy(".github/CNAME", "CNAME");
 
 site.data("siteKeywords", "help-14,help14,nhan,phan,developer,programmer,coder,blog");
 
