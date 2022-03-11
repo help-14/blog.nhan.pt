@@ -2,7 +2,7 @@
 layout: page.njk
 title: Fix lỗi thường gặp trên OpenWRT
 description: Một số tips, trick cho các thiết bị chạy trên OpenWRT
-cover: https://i.imgur.com/UmCi4s6.png
+cover: https://linuxiac.b-cdn.net/wp-content/uploads/2021/09/openwrt.png
 tags:
   - linux
   - openwrt
@@ -17,7 +17,7 @@ Hiện tại thì mình đang sử dụng máy tính mini dùng chip Intel Celer
 
 Bản OpenWRT của mình là do các [pháp sư trung hoa](https://github.com/HoldOnBro/Actions-OpenWrt) build dựa trên OpenWRT 21 mới nhất.
 
-![](https://i.imgur.com/Ni2axOp.png)
+<img src='https://i.imgur.com/Ni2axOp.png' style="max-width: 700px" /><br /><br />
 
 ## Docker
 

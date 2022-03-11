@@ -19,7 +19,7 @@
 </div>
 <div class="row animate-box">
     <div class="owl-carousel1">
-        {% for post in search.pages(category) | slice(9) | first %}        
+        {% for post in search.pages(category) | sort(true, false, "data.date") %}        
         <div class="item">
             <div class="col-md-12">
                 <div class="article">
