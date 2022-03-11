@@ -2,7 +2,7 @@
 layout: page.njk
 title: Quản lý nhiệt độ thiết bị trên Proxmox 7
 description: Thêm nhiệt độ CPU, GPU, Disk lên giao diện quản lý của Proxmox 7
-cover: https://miro.medium.com/max/1400/1*FUSYZTFrRKI5qQ2rkswK2Q.png
+cover: https://i.imgur.com/GyjF1ZA.png
 tags:
   - linux
   - proxmox
