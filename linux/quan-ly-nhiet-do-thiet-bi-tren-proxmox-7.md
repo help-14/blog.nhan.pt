@@ -3,6 +3,7 @@ layout: page.njk
 title: Quản lý nhiệt độ thiết bị trên Proxmox 7
 description: Thêm nhiệt độ CPU, GPU, Disk lên giao diện quản lý của Proxmox 7
 cover: https://i.imgur.com/GyjF1ZA.png
+author: Phan Nhan
 tags:
   - linux
   - proxmox
@@ -35,8 +36,9 @@ $res->{HDDtemperature} = `hddtemp /dev/sda`;
 Mở file `/usr/share/pve-manager/js/pvemanagerlib.js`:
 - Tìm `height: 300` và sửa thành `height: 420`
 - Tìm `pveversion` ở gần dòng 34827, thêm vào bên dưới:
+
 ```
-{
+        {
             itemId: 'version',
             colspan: 2,
             printBar: false,

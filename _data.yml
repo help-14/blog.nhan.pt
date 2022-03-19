@@ -1,1 +1,4 @@
-layout: layout.njk
+domain: https://blog.nhan.pt
+categories:
+  - dotnet
+  - linux
