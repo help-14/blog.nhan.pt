@@ -43,7 +43,7 @@
             <div class="row gy-5 gx-4 g-xl-5">
                 {% set posts = [] %}
                 {% for category in categories %}
-                    {% for post in search.pages(category) %}
+                    {% for post in search.pages(category, "date=desc", 4) %}
                         {% if (posts.length < 10) %}
                             {% set posts = (posts.push(post), posts) %}
                         {% endif %}

@@ -17,7 +17,7 @@
 
     <div class="container">
         <div class="row gy-5 gx-4 g-xl-5">
-            {% for post in search.pages(category) %}
+            {% for post in search.pages(category, "date=desc") %}
                 <div class="col-lg-6">
                     <article class="card post-card h-100 border-0 bg-transparent">
                         <div class="card-body">
