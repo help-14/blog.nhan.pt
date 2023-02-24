@@ -1,6 +1,6 @@
 ---
 layout: category.njk
-title: DotNet
+title: Code
 description: Posts about .net
-category: dotnet
+category: code
 ---
