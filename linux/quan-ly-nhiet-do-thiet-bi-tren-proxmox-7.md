@@ -5,6 +5,7 @@ description: Thêm nhiệt độ CPU, GPU, Disk lên giao diện quản lý củ
 cover: https://i.imgur.com/GyjF1ZA.png
 author: Phan Nhan
 time: 03/10/2022
+timestamp: 1646845200000
 tags:
   - linux
   - proxmox

@@ -5,6 +5,7 @@ description: Sửa lỗi máy ảo trên Truenas Scale không kết nối đư�
 cover: https://www.truenas.com/wp-content/uploads/2022/02/SCALE-Dashboard.jpg
 author: Phan Nhan
 time: 02/24/2023
+timestamp: 1677255645296
 tags:
   - linux
   - truenas
