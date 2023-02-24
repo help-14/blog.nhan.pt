@@ -4,7 +4,7 @@ title: Virtual machine trên Truenas Scale không vào được LAN
 description: Sửa lỗi máy ảo trên Truenas Scale không kết nối được vào mạng LAN
 cover: https://www.truenas.com/wp-content/uploads/2022/02/SCALE-Dashboard.jpg
 author: Phan Nhan
-time: 24/02/2023
+time: 02/24/2023
 tags:
   - linux
   - truenas
