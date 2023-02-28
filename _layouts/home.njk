@@ -1,11 +1,12 @@
 {% extends "layout.njk" %}
+{% include "header-svg.njk" %}
 
 {% block blockContent %}
 
     <!-- banner start -->
     <section class="section banner overflow-hidden">
         <div class="container">
-            {{ 'home-svg.njk' | render({}) }}   
+            {% block headerSvg %}{% endblock %} 
         </div>
     </section>
     <!-- banner end -->
