@@ -1,6 +1,6 @@
 ---
 layout: category.njk
 title: Code
-description: Posts about .net
+description: Các bài viết liên quan đến lập trình
 category: code
 ---
