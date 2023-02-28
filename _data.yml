@@ -1,5 +1,8 @@
 domain: https://blog.nhan.pt
 categories:
-  - entertainment
-  - linux
-  - code
+  - id: entertainment
+    name: Giải trí
+  - id: linux
+    name: Linux
+  - id: code
+    name: Code

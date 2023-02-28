@@ -60,8 +60,8 @@
                                         <a class="nav-link" href="/">Trang chủ</a>
                                     </li>
                                     {% for category in categories %}
-                                        <li class="nav-item @@{{category}}">
-                                            <a class="nav-link" href="/{{category}}">{{category | capitalize }}</a>
+                                        <li class="nav-item @@{{category.id}}">
+                                            <a class="nav-link" href="/{{category.id}}">{{category.name | capitalize }}</a>
                                         </li>
                                     {% endfor %}
                                 </ul>
@@ -96,7 +96,7 @@
                 <ul class="card-meta-tag list-inline">
                     {% for category in categories %}
                         <li class="list-inline-item me-1 mb-2">
-                            <a class="small" href="/{{category}}">{{category | capitalize }}</a>
+                            <a class="small" href="/{{category.id}}">{{category.name | capitalize }}</a>
                         </li>
                     {% endfor %}
                 </ul>
