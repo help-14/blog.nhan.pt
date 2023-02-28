@@ -1,5 +1,7 @@
 domain: https://blog.nhan.pt
 categories:
+  - id: food-drink
+    name: Ăn uống
   - id: entertainment
     name: Giải trí
   - id: linux

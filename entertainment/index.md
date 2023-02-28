@@ -1,6 +1,6 @@
 ---
 layout: category.njk
 title: Giải trí
-description: Ăn uống, du lịch, chơi bời
+description: Du lịch, chơi bời
 category: entertainment
 ---
