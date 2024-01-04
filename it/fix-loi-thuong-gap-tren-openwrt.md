@@ -7,7 +7,7 @@ author: Phan Nhan
 time: 03/11/2022
 timestamp: 1646931600000
 tags:
-  - linux
+  - it
   - openwrt
 ---
 Nếu các bạn chưa biết thì OpenWRT là hệ điều hành mã nguồn mở dựa trên Linux được thiết kế cho các thiết bị như router, switch, wifi access point, ... Nhờ việc là mã nguồn mở mà có rất nhiều add-on được viết cho OpenWRT để chạy thêm nhiều tính năng của Linux như Docker, KVM-Qemu, VLAN, proxy, ...

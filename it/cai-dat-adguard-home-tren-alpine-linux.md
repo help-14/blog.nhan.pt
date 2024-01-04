@@ -7,7 +7,7 @@ author: Phan Nhan
 time: 04/29/2022
 timestamp: 1651165200000
 tags:
-  - linux
+  - it
 ---
 Hướng dẫn cài đặt chính thức của Adguard Home trên Github được viết cho hệ điều hành nhân Debian nên không thể sử dụng để cài đặt trên Alpine do không có Systemd.
 Tuy nhiên chúng ta có thể dễ dàng chuyển qua sử dụng OpenRC để thay thế Như sau:

@@ -7,7 +7,7 @@ author: Phan Nhan
 time: 02/24/2023
 timestamp: 1677255645296
 tags:
-  - linux
+  - it
   - truenas
 ---
 

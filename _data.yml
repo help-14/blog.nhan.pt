@@ -4,7 +4,5 @@ categories:
     name: Ăn uống
   - id: entertainment
     name: Giải trí
-  - id: linux
-    name: Linux
-  - id: code
-    name: Code
+  - id: it
+    name: IT
