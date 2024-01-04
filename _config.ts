@@ -1,4 +1,4 @@
-import lume from "https:/deno.land/x/lume/mod.ts";
+import lume from "https:/deno.land/x/lume@v1.15.3/mod.ts";
 import attributes from "lume/plugins/attributes.ts";
 import code_highlight from "lume/plugins/code_highlight.ts";
 import resolveUrls from "lume/plugins/resolve_urls.ts";
