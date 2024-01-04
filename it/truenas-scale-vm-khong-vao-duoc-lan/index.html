@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="vi"><head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Virtual machine trên Truenas Scale không vào được LAN</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="Sửa lỗi máy ảo trên Truenas Scale không kết nối được vào mạng LAN">
+        <meta name="keywords" content="help-14,help14,nhan,phan,developer,programmer,coder,blog">
+        <meta name="author" content="Help-14">
+        <link rel="shortcut icon" href="/images/favicon.ico">
+
+        <!-- CSS Plugins -->
+        <link rel="preconnect" href="https://fonts.googleapis.com/">
+        <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+        <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@500;600&amp;display=swap" rel="stylesheet">
+
+        <link rel="stylesheet" href="/bootstrap/bootstrap.min.css">
+        <link rel="stylesheet" href="/tabler-icons/tabler-icons.min.css">
+
+        <!-- Main Stylesheet -->
+        <link rel="stylesheet" href="/css/style.css">
+
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-64HGCN0E6J"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag() {
+                dataLayer.push(arguments);
+            }
+            gtag('js', new Date());
+            gtag('config', 'G-64HGCN0E6J');
+        </script>
+    </head>
+
+    <body>
+        <div class="header-height-fix"></div>
+        <header class="header-nav">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <nav class="navbar navbar-expand-lg navbar-light p-0">
+                            <a class="navbar-brand font-weight-bold mb-0" href="/" title="Nhan.PT Blog">
+                                <b>Nhan.PT</b>
+                            </a>
+
+                            <button class="search-toggle d-inline-block d-lg-none ms-auto me-1 me-sm-3" data-toggle="search" aria-label="Search Toggle">
+                                <span>Search</span>
+                                <svg width="22" height="22" stroke-width="1.5" viewbox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15.5 15.5L19 19" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path><path d="M5 11C5 14.3137 7.68629 17 11 17C12.6597 17 14.1621 16.3261 15.2483 15.237C16.3308 14.1517 17 12.654 17 11C17 7.68629 14.3137 5 11 5C7.68629 5 5 7.68629 5 11Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                            </button>
+
+                            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navHeader" aria-controls="navHeader" aria-expanded="false" aria-label="Toggle navigation">
+                                <i class="ti ti-menu-2 d-inline"></i>
+                                <i class="ti ti-x d-none"></i>
+                            </button>
+
+                            <div class="collapse navbar-collapse" id="navHeader">
+                                <ul class="navbar-nav mx-auto">
+                                    <li class="nav-item active">
+                                        <a class="nav-link" href="/">Trang chủ</a>
+                                    </li>
+                                    
+                                        <li class="nav-item @@food-drink">
+                                            <a class="nav-link" href="/food-drink">Ăn uống</a>
+                                        </li>
+                                    
+                                        <li class="nav-item @@entertainment">
+                                            <a class="nav-link" href="/entertainment">Giải trí</a>
+                                        </li>
+                                    
+                                        <li class="nav-item @@it">
+                                            <a class="nav-link" href="/it">It</a>
+                                        </li>
+                                    
+                                </ul>
+
+                                <div class="navbar-right d-none d-lg-inline-block">
+                                    <ul class="social-links list-unstyled list-inline">
+                                        <li class="list-inline-item ms-4 d-none d-lg-inline-block">
+                                            <button class="search-toggle" data-toggle="search" aria-label="Search Toggle">
+                                                <span>Tìm kiếm</span>
+                                                <svg width="22" height="22" stroke-width="1.5" viewbox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15.5 15.5L19 19" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path><path d="M5 11C5 14.3137 7.68629 17 11 17C12.6597 17 14.1621 16.3261 15.2483 15.237C16.3308 14.1517 17 12.654 17 11C17 7.68629 14.3137 5 11 5C7.68629 5 5 7.68629 5 11Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                                            </button>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                            </div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div class="search-block">
+            <div data-toggle="search-close">
+                <span class="ti ti-x text-primary"></span>
+            </div>
+
+            <input type="text" id="js-search-input" placeholder="Nhập vào từ khóa cần tìm.." aria-label="search-query">
+
+            <div class="mt-4 card-meta">
+                <p class="h4 mb-3">Tìm theo phân loại</p>
+                <ul class="card-meta-tag list-inline">
+                    
+                        <li class="list-inline-item me-1 mb-2">
+                            <a class="small" href="/food-drink">Ăn uống</a>
+                        </li>
+                    
+                        <li class="list-inline-item me-1 mb-2">
+                            <a class="small" href="/entertainment">Giải trí</a>
+                        </li>
+                    
+                        <li class="list-inline-item me-1 mb-2">
+                            <a class="small" href="/it">It</a>
+                        </li>
+                    
+                </ul>
+            </div>
+        </div>
+
+        
+
+    <section class="section-sm pb-0">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="mb-5">
+                        <h3 class="h1 mb-4 post-title">Virtual machine trên Truenas Scale không vào được LAN</h3>
+
+                        <ul class="card-meta list-inline mb-2">
+                            <li class="list-inline-item mt-2">
+                                <a class="card-meta-author">
+                                    <img class="w-auto" src="/images/author/Phan Nhan.jpg" width="26" height="26">
+                                    <span>Phan Nhan</span>
+                                </a>
+                            </li>
+                            <li class="list-inline-item mt-2">—</li>
+                            <li class="list-inline-item mt-2">
+                                <i class="ti ti-clock"></i>
+                                <span>đọc trong 5 phút</span>
+                            </li>
+                            <li class="list-inline-item mt-2">—</li>
+                            <li class="list-inline-item mt-2">
+                                <i class="ti ti-calendar-event"></i>
+                                <span>ngày 4 tháng 01 năm 2024</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <div class="mb-5 text-center">
+                        <img class="w-100 h-auto rounded" src="https://www.truenas.com/wp-content/uploads/2022/02/SCALE-Dashboard.jpg" width="970" height="500">
+                    </div>
+                </div>
+                <div class="col-lg-2 post-share-block order-1 order-lg-0 mt-5 mt-lg-0">
+                    <div class="position-sticky" style="top:150px">
+                        <span class="d-inline-block mb-3 small">SHARE</span>
+                        <ul class="social-share icon-box">
+                            <li class="d-inline-block d-lg-block me-2 mb-2" onclick="return tbs_click()">
+                                <i class="ti ti-brand-twitter"></i>
+                            </li>
+                            <li class="d-inline-block d-lg-block me-2 mb-2" onclick="return fbs_click()">
+                                <i class="ti ti-brand-facebook"></i>
+                            </li>
+                            <li class="d-inline-block d-lg-block me-2 mb-2" onclick="return ins_click()">
+                                <i class="ti ti-brand-linkedin"></i>
+                            </li>
+                            <li class="d-inline-block d-lg-block me-2 mb-2" onclick="return red_click()">
+                                <i class="ti ti-brand-reddit"></i>
+                            </li>
+                            <li class="d-inline-block d-lg-block me-2 mb-2" onclick="return pin_click()">
+                                <i class="ti ti-brand-pinterest"></i>
+                            </li>
+                        </ul>
+                    </div>
+                    <script type="text/javascript">
+                        var pageLink = window.location.href;
+                        var pageTitle = String(document.title).replace(/\&/g, '%26');
+                        function tbs_click() {
+                            pageLink = 'https://twitter.com/intent/tweet?text=Virtual machine trên Truenas Scale không vào được LAN&amp;url=https://blog.nhan.pt/it/truenas-scale-vm-khong-vao-duoc-lan/';
+                            socialWindow(pageLink, 570, 570);
+                        }
+                        function fbs_click() {
+                            pageLink = 'https://www.facebook.com/sharer.php?u=https://blog.nhan.pt/it/truenas-scale-vm-khong-vao-duoc-lan/&amp;quote=Virtual machine trên Truenas Scale không vào được LAN';
+                            socialWindow(pageLink, 570, 570);
+                        }
+                        function ins_click() {
+                            pageLink = 'https://www.linkedin.com/sharing/share-offsite/?url=https://blog.nhan.pt/it/truenas-scale-vm-khong-vao-duoc-lan/';
+                            socialWindow(pageLink, 570, 570);
+                        }
+                        function red_click() {
+                            pageLink = 'https://www.reddit.com/submit?url=https://blog.nhan.pt/it/truenas-scale-vm-khong-vao-duoc-lan/';
+                            socialWindow(pageLink, 570, 570);
+                        }
+                        function socialWindow(pageLink, width, height) {
+                            var left = (screen.width - width) / 2;
+                            var top = (screen.height - height) / 2;
+                            var params = "menubar=no,toolbar=no,status=no,width=" + width + ",height=" + height + ",top=" + top + ",left=" + left;
+                            window.open(pageLink, "", params);
+                        }
+                    </script>
+                </div>
+                <div class="col-lg-8 post-content-block order-0 order-lg-2">
+                    <div class="content">
+                        <p>Đợt vừa rồi cải tổ lại đống homelab ở nhà, mình chuyển qua dùng tập trung trên TrueNas chứ không còn sử dụng Proxmox nữa vì nhu cầu không đến và cần truy cập trực tiếp lên dữ liệu trong nas. Chủ yếu là mình chạy Docker trong K3s của TrueNas và 1 con VM cho cloud print và Proxy, tuy nhiên Proxy thử cả Wireguard và V2ray đều không vào được các IP trong Lan (và các pod Docker).</p>
+<h2>Tạo một interface Bridge cho Truenas</h2>
+<p>Mặc định sau khi cài xong TrueNas, mục Network của bạn sẽ trông như thế này:</p>
+<p><img src="https://i.imgur.com/oBtl7bh.jpg" alt="Truenas scale network"></p>
+<p>Mặc định sau khi tạo VM hay Docker pod, mạng của bạn cũng sẽ được trỏ thẳng vào đây, dẫn tới conflict và không thể phân giải được IP trong local. Cách fix khá đơn giản như sau:</p>
+<ul>
+<li>
+<p>Dừng toàn bộ VM và Docker đang chạy lại nếu không sẽ không thực hiện được các bước dưới.</p>
+</li>
+<li>
+<p>Edit interface mạng hiện có, bỏ chọn DHCP và xoá IP nếu có *</p>
+</li>
+</ul>
+<p><img src="https://i.imgur.com/8ZRxwlA.png" alt="edit interface"></p>
+<ul>
+<li>Tạo một interface bridge (ví dụ tên là br0), chọn bridge vào mạng gốc ở trên và set IP vào giống mạng gốc *</li>
+</ul>
+<p><img src="https://i.imgur.com/73kJrCW.png" alt="new interface"></p>
+<ul>
+<li>Try và Apply thay đổi *</li>
+</ul>
+<p>Nếu thực hiện đúng Truenas sẽ thử mạng tầm 10-20 giây và cho phép thay đổi mạng của bạn. Lúc này bạn hãy restart lại Truenas nhé, rất quan trọng đó.</p>
+<ul>
+<li>Sau khi restart thì hãy sửa lại Global Configuration nhé vì nó sẽ mất *</li>
+</ul>
+<p><img src="https://i.imgur.com/R5bqWJV.png" alt="Edit Global Configuration"></p>
+<h2>Sửa mạng cho Virtual Machine</h2>
+<p>Sau khi hoàn thành bước trên, bạn cần sửa lại NIC của VM và trỏ về bridge br0 vừa tạo.</p>
+<p><img src="https://i.imgur.com/goAbejK.png" alt="Edit VM devices"></p>
+<p><img src="https://i.imgur.com/ZRN0AzX.png" alt="Edit VM NIC"></p>
+<p><img src="https://i.imgur.com/4xx75Qc.png" alt="Edit VM NIC Bridge"></p>
+<h2>Sửa mạng cho Docker</h2>
+<p>Sau khi tạo bridge br0, Docker của bạn sẽ không chạy được do Kubernetes Settings mất thông tin mạng. Bạn cần chỉnh sửa lại như sau để Docker hoạt động bình thường.</p>
+<p><img src="https://i.imgur.com/yzhXQIT.png" alt="Edit Kubernetes Settings"></p>
+<p><img src="https://i.imgur.com/YyNAA9h.png" alt="Edit Kubernetes network"></p>
+<p>Như vậy là Truenas của bạn sẽ hoạt động trở lại bình thường, VM sẽ có thể truy cập vào Docker và ngược lại. Hẹn gặp lại các bạn sau khi mình gặp lỗi mới :)))</p>
+
+                    </div>
+
+                    <ul class="post-meta-tag list-unstyled list-inline mt-5">
+                        <li class="list-inline-item">Tags: </li>
+                        
+                            <li class="list-inline-item">
+                                <a class="bg-white" href="/it">it</a>
+                            </li>
+                        
+                            <li class="list-inline-item">
+                                <a class="bg-white" href="/truenas">truenas</a>
+                            </li>
+                        
+                    </ul>
+                </div>
+            </div>
+
+            
+            
+            
+
+        </div>
+    </section>
+
+
+
+        <!-- start of footer -->
+        <footer>
+            <div class="container">
+                <div class="section">
+                    <div class="row justify-content-center align-items-center">
+                        <div class="col-xl-6 col-lg-8 col-md-10"></div>
+                    </div>
+                </div>
+                <div class="pb-5">
+                    <div class="row g-2 g-lg-4 align-items-center">
+                        <div class="col-lg-6 text-center text-lg-start">
+                            <p class="mb-0 copyright-text content">©2022 @ Nhan.PT</p>
+                        </div>
+                        <div class="col-lg-6 text-center text-lg-end">
+                            <ul class="list-inline footer-menu">
+                                <li class="list-inline-item m-0">
+                                    <a href="https://nhan.pt">Home Page</a>
+                                </li>
+                                <li class="list-inline-item m-0">
+                                    <a href="https://help-14.com">Help-14</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- end of footer -->
+
+        <!-- JS Plugins -->
+        <script src="/jquery/jquery.min.js"></script>
+        <script src="/bootstrap/bootstrap.min.js"></script>
+        <script src="/lightense/lightense.min.js"></script>
+
+        <!-- Main Script -->
+        <script src="/js/script.js"></script>
+    
+
+</body></html>

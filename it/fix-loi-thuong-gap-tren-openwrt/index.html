@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="vi"><head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Fix lỗi thường gặp trên OpenWRT</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="Một số tips, trick cho các thiết bị chạy trên OpenWRT">
+        <meta name="keywords" content="help-14,help14,nhan,phan,developer,programmer,coder,blog">
+        <meta name="author" content="Help-14">
+        <link rel="shortcut icon" href="/images/favicon.ico">
+
+        <!-- CSS Plugins -->
+        <link rel="preconnect" href="https://fonts.googleapis.com/">
+        <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+        <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@500;600&amp;display=swap" rel="stylesheet">
+
+        <link rel="stylesheet" href="/bootstrap/bootstrap.min.css">
+        <link rel="stylesheet" href="/tabler-icons/tabler-icons.min.css">
+
+        <!-- Main Stylesheet -->
+        <link rel="stylesheet" href="/css/style.css">
+
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-64HGCN0E6J"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag() {
+                dataLayer.push(arguments);
+            }
+            gtag('js', new Date());
+            gtag('config', 'G-64HGCN0E6J');
+        </script>
+    </head>
+
+    <body>
+        <div class="header-height-fix"></div>
+        <header class="header-nav">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <nav class="navbar navbar-expand-lg navbar-light p-0">
+                            <a class="navbar-brand font-weight-bold mb-0" href="/" title="Nhan.PT Blog">
+                                <b>Nhan.PT</b>
+                            </a>
+
+                            <button class="search-toggle d-inline-block d-lg-none ms-auto me-1 me-sm-3" data-toggle="search" aria-label="Search Toggle">
+                                <span>Search</span>
+                                <svg width="22" height="22" stroke-width="1.5" viewbox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15.5 15.5L19 19" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path><path d="M5 11C5 14.3137 7.68629 17 11 17C12.6597 17 14.1621 16.3261 15.2483 15.237C16.3308 14.1517 17 12.654 17 11C17 7.68629 14.3137 5 11 5C7.68629 5 5 7.68629 5 11Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                            </button>
+
+                            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navHeader" aria-controls="navHeader" aria-expanded="false" aria-label="Toggle navigation">
+                                <i class="ti ti-menu-2 d-inline"></i>
+                                <i class="ti ti-x d-none"></i>
+                            </button>
+
+                            <div class="collapse navbar-collapse" id="navHeader">
+                                <ul class="navbar-nav mx-auto">
+                                    <li class="nav-item active">
+                                        <a class="nav-link" href="/">Trang chủ</a>
+                                    </li>
+                                    
+                                        <li class="nav-item @@food-drink">
+                                            <a class="nav-link" href="/food-drink">Ăn uống</a>
+                                        </li>
+                                    
+                                        <li class="nav-item @@entertainment">
+                                            <a class="nav-link" href="/entertainment">Giải trí</a>
+                                        </li>
+                                    
+                                        <li class="nav-item @@it">
+                                            <a class="nav-link" href="/it">It</a>
+                                        </li>
+                                    
+                                </ul>
+
+                                <div class="navbar-right d-none d-lg-inline-block">
+                                    <ul class="social-links list-unstyled list-inline">
+                                        <li class="list-inline-item ms-4 d-none d-lg-inline-block">
+                                            <button class="search-toggle" data-toggle="search" aria-label="Search Toggle">
+                                                <span>Tìm kiếm</span>
+                                                <svg width="22" height="22" stroke-width="1.5" viewbox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15.5 15.5L19 19" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path><path d="M5 11C5 14.3137 7.68629 17 11 17C12.6597 17 14.1621 16.3261 15.2483 15.237C16.3308 14.1517 17 12.654 17 11C17 7.68629 14.3137 5 11 5C7.68629 5 5 7.68629 5 11Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                                            </button>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                            </div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div class="search-block">
+            <div data-toggle="search-close">
+                <span class="ti ti-x text-primary"></span>
+            </div>
+
+            <input type="text" id="js-search-input" placeholder="Nhập vào từ khóa cần tìm.." aria-label="search-query">
+
+            <div class="mt-4 card-meta">
+                <p class="h4 mb-3">Tìm theo phân loại</p>
+                <ul class="card-meta-tag list-inline">
+                    
+                        <li class="list-inline-item me-1 mb-2">
+                            <a class="small" href="/food-drink">Ăn uống</a>
+                        </li>
+                    
+                        <li class="list-inline-item me-1 mb-2">
+                            <a class="small" href="/entertainment">Giải trí</a>
+                        </li>
+                    
+                        <li class="list-inline-item me-1 mb-2">
+                            <a class="small" href="/it">It</a>
+                        </li>
+                    
+                </ul>
+            </div>
+        </div>
+
+        
+
+    <section class="section-sm pb-0">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="mb-5">
+                        <h3 class="h1 mb-4 post-title">Fix lỗi thường gặp trên OpenWRT</h3>
+
+                        <ul class="card-meta list-inline mb-2">
+                            <li class="list-inline-item mt-2">
+                                <a class="card-meta-author">
+                                    <img class="w-auto" src="/images/author/Phan Nhan.jpg" width="26" height="26">
+                                    <span>Phan Nhan</span>
+                                </a>
+                            </li>
+                            <li class="list-inline-item mt-2">—</li>
+                            <li class="list-inline-item mt-2">
+                                <i class="ti ti-clock"></i>
+                                <span>đọc trong 5 phút</span>
+                            </li>
+                            <li class="list-inline-item mt-2">—</li>
+                            <li class="list-inline-item mt-2">
+                                <i class="ti ti-calendar-event"></i>
+                                <span>ngày 4 tháng 01 năm 2024</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <div class="mb-5 text-center">
+                        <img class="w-100 h-auto rounded" src="https://linuxiac.b-cdn.net/wp-content/uploads/2021/09/openwrt.png" width="970" height="500">
+                    </div>
+                </div>
+                <div class="col-lg-2 post-share-block order-1 order-lg-0 mt-5 mt-lg-0">
+                    <div class="position-sticky" style="top:150px">
+                        <span class="d-inline-block mb-3 small">SHARE</span>
+                        <ul class="social-share icon-box">
+                            <li class="d-inline-block d-lg-block me-2 mb-2" onclick="return tbs_click()">
+                                <i class="ti ti-brand-twitter"></i>
+                            </li>
+                            <li class="d-inline-block d-lg-block me-2 mb-2" onclick="return fbs_click()">
+                                <i class="ti ti-brand-facebook"></i>
+                            </li>
+                            <li class="d-inline-block d-lg-block me-2 mb-2" onclick="return ins_click()">
+                                <i class="ti ti-brand-linkedin"></i>
+                            </li>
+                            <li class="d-inline-block d-lg-block me-2 mb-2" onclick="return red_click()">
+                                <i class="ti ti-brand-reddit"></i>
+                            </li>
+                            <li class="d-inline-block d-lg-block me-2 mb-2" onclick="return pin_click()">
+                                <i class="ti ti-brand-pinterest"></i>
+                            </li>
+                        </ul>
+                    </div>
+                    <script type="text/javascript">
+                        var pageLink = window.location.href;
+                        var pageTitle = String(document.title).replace(/\&/g, '%26');
+                        function tbs_click() {
+                            pageLink = 'https://twitter.com/intent/tweet?text=Fix lỗi thường gặp trên OpenWRT&amp;url=https://blog.nhan.pt/it/fix-loi-thuong-gap-tren-openwrt/';
+                            socialWindow(pageLink, 570, 570);
+                        }
+                        function fbs_click() {
+                            pageLink = 'https://www.facebook.com/sharer.php?u=https://blog.nhan.pt/it/fix-loi-thuong-gap-tren-openwrt/&amp;quote=Fix lỗi thường gặp trên OpenWRT';
+                            socialWindow(pageLink, 570, 570);
+                        }
+                        function ins_click() {
+                            pageLink = 'https://www.linkedin.com/sharing/share-offsite/?url=https://blog.nhan.pt/it/fix-loi-thuong-gap-tren-openwrt/';
+                            socialWindow(pageLink, 570, 570);
+                        }
+                        function red_click() {
+                            pageLink = 'https://www.reddit.com/submit?url=https://blog.nhan.pt/it/fix-loi-thuong-gap-tren-openwrt/';
+                            socialWindow(pageLink, 570, 570);
+                        }
+                        function socialWindow(pageLink, width, height) {
+                            var left = (screen.width - width) / 2;
+                            var top = (screen.height - height) / 2;
+                            var params = "menubar=no,toolbar=no,status=no,width=" + width + ",height=" + height + ",top=" + top + ",left=" + left;
+                            window.open(pageLink, "", params);
+                        }
+                    </script>
+                </div>
+                <div class="col-lg-8 post-content-block order-0 order-lg-2">
+                    <div class="content">
+                        <p>Nếu các bạn chưa biết thì OpenWRT là hệ điều hành mã nguồn mở dựa trên Linux được thiết kế cho các thiết bị như router, switch, wifi access point, ... Nhờ việc là mã nguồn mở mà có rất nhiều add-on được viết cho OpenWRT để chạy thêm nhiều tính năng của Linux như Docker, KVM-Qemu, VLAN, proxy, ...</p>
+<p>Do được viết dựa trên core musl của Linux nên sẽ có nhiều thành phần bị cắt giảm tối đa với mục đích đủ duong lượng trên các thiết bị cấu hình thấp, sẽ có một vài lỗi vặt xảy ra hoặc do không tương thích. Trong bài viết này mình sẽ tổng hợp một vài lỗi mà mình gặp phải trên thiết bị của mình nhé.</p>
+<h2>Thiết bị</h2>
+<p>Hiện tại thì mình đang sử dụng máy tính mini dùng chip Intel Celeron J4125, máy có 4 cổng mạng 2.5G dựa trên chịp Realtek RTL8125B. Bạn có thể xem review sơ qua của mình ở <a href="https://voz.vn/t/mini-review-router-j4125-rtl8125-4-cong-2-5g.443542/">đây</a>.</p>
+<p>Bản OpenWRT của mình là do các <a href="https://github.com/HoldOnBro/Actions-OpenWrt">pháp sư trung hoa</a> build dựa trên OpenWRT 21 mới nhất.</p>
+<p><img src="https://i.imgur.com/Ni2axOp.png" style="max-width: 700px"><br><br></p>
+<h2>Docker</h2>
+<p>Dù mình đã sửa file <code>/etc/docker/daemon.json</code> để chuyển data của Docker sang phân vùng mới, thì khi tải image về, docker vẫn tải về phân vùng hệ thống (200MB) nên báo lỗi hết ổ cứng. Để Fix thì mọi người dùng symlink link cái folder tạm của docker sang phân vùng mới là được.
+<code>ln -s /mount/cua/phan/vung/moi/docker_temp /var/lib/docker</code></p>
+<h2>Samba</h2>
+<p>Nếu gặp vấn đề với samba4 ko kết nối được, thì vào system -&gt; startup để disable vào stop server ksmbd, sau đó restart service samba4.</p>
+<h2>Crontab</h2>
+<p>Crontab của openwrt khá ngu, dùng @hourly @daily không chạy được đâu, mọi người dùng kiểu cũ nhé: <code>0 * * * *</code></p>
+<h2>DNS</h2>
+<p>Khi trỏ domain vào đây thì mọi người nhớ chỉnh cả <code>A</code> record vào ipv4, <code>AAAA</code> record vào ipv6, sau đó vào <code>Network</code> -&gt; <code>DHCP &amp; DDNS</code> để whitelist domain đó hoặc tắt hẳn <code>Rebind protection</code> đi, như thế các thiết bị trong LAN sẽ vào được domain như bình thường.</p>
+<h2>Grub</h2>
+<p>Grub có mội lỗi nếu cắm USB hoặc SSD thứ 2 thì ko boot được, mọi người tạm tháo usb ra để vào, sau đó sửa file <code>/boot/grub/grub.cfg</code>. Sửa <code>set root='(hd0,gpt1)'</code> thành set <code>root='(hd1,gpt1)'</code> rồi cắm usb/ssd vào reboot bình thường.</p>
+<h2>KVM/qEMU</h2>
+<p>OpenWRT không chỉ cho cài container trên Docker, mà còn có thể chạy máy ảo KVM/qEMU luôn, passthrough  usb, ssd, gpu bình thường.</p>
+<p>Đầu tiên bạn cần cài đặt các gói tin cần thiết sau:</p>
+<pre><code>opkg install kmod-tun qemu-bridge-helper qemu-x86_64-softmmu kmod-kvm-intel
+</code></pre>
+<p>Tạo 1 ổ cứng cho máy ảo, ở đây mình tạo 8Gb làm  ví dụ:</p>
+<pre><code>qemu-img create -f qcow2 debian.qcow2 8G
+</code></pre>
+<p>Chạy thử máy ảo với file cài iso:</p>
+<pre><code>qemu-system-x86_64 -m 512 -nic user -boot d -cdrom ./iso/debian-11.1.0-amd64-netinst.iso -hda debian.qcow2
+</code></pre>
+<p>Để có thể dùng VNC lúc cài đặt, bạn cần mở port đên OpenWRT từ máy tính của bạn, ví dụ OpenWRT mình chạy ở 192.168.2.1 thì mình sẽ gõ lệnh này từ máy tính, sau đó dùng VNC đến <code>localhost:5900</code></p>
+<pre><code>ssh -nfNT -L 5900:127.0.0.1:5901 root@192.168.2.1
+</code></pre>
+<p>Sau khi cài đặt xong, nếu bạn muốn giữ MAC address không bị đổi thì dùng lệnh này:</p>
+<pre><code>qemu-system-x86_64 -boot d -smp 2 -m 1G -enable-kvm \
+	-cdrom ./iso/debian-11.1.0-amd64-netinst.iso \
+	-hda debian.qcow2 \
+	-device virtio-net-pci,mac=aa:88:04:fd:20:ba,netdev=br0 \
+  -netdev bridge,br=br-lan,id=br0
+</code></pre>
+<p>Nếu bạn muốn máy ảo khởi động cùng máy như một service của OpenWRT, bạn cần tạo file service cho thiết bị. Ví dụ ở đây mình đặt tên service là qemu chẳng hạn.</p>
+<pre><code>nano /etc/init.d/qemu
+</code></pre>
+<p>Điền vào file như sau:</p>
+<pre><code>#!/bin/sh /etc/rc.common
+ 
+START=99
+STOP=1
+ 
+qemu_pidfile="/var/run/qemu-debian.pid"
+ 
+start() {
+qemu-system-x86_64 -enable-kvm -cpu host -smp 2 -m 1G \
+	-hda /nas/VM/debian.qcow2 \
+	-device virtio-net-pci,mac=aa:88:04:fd:20:ba,netdev=br0 \
+	-netdev bridge,br=br-lan,id=br0 \
+	-qmp tcp:127.0.0.1:4444,server,nowait \
+	-daemonize &amp;&gt; /var/log/qemu-debian.log
+ 
+/usr/bin/pgrep qemu-system-x86_64 &gt; $qemu_pidfile
+echo "QEMU: Started VM with PID $(cat $qemu_pidfile)."
+}
+ 
+stop() {
+echo "QEMU: Sending 'system_powerdown' to VM with PID $(cat $qemu_pidfile)."
+nc localhost 4444 &lt;&lt;QMP 
+{ "execute": "qmp_capabilities" } 
+{ "execute": "system_powerdown" } 
+QMP
+
+if [ -e $qemu_pidfile ]; then
+	if [ -e /proc/$(cat $qemu_pidfile) ]; then
+		echo "QEMU: Waiting for VM shutdown."
+		while [ -e /proc/$(cat $qemu_pidfile) ]; do sleep 1s; done
+		echo "QEMU: VM Process $(cat $qemu_pidfile) finished."
+	else
+		echo "QEMU: Error: No VM with PID $(cat $qemu_pidfile) running."
+	fi
+ 
+	rm -f $qemu_pidfile
+else
+	echo "QEMU: Error: $qemu_pidfile doesn't exist."
+fi
+}
+</code></pre>
+<pre><code>chmod +x /etc/init.d/qemu
+</code></pre>
+<p>Chú ý nếu bạn có nhiều VM cùng chạy thì nhớ đổi port <code>4444</code> thành các port khác nhau cho mỗi VM.</p>
+<p>Giờ chỉ cần lưu lại là bạn có thể điều khiển trong <code>System</code> =&gt; <code>Startup</code> trên Website của OpenWRT.</p>
+
+                    </div>
+
+                    <ul class="post-meta-tag list-unstyled list-inline mt-5">
+                        <li class="list-inline-item">Tags: </li>
+                        
+                            <li class="list-inline-item">
+                                <a class="bg-white" href="/it">it</a>
+                            </li>
+                        
+                            <li class="list-inline-item">
+                                <a class="bg-white" href="/openwrt">openwrt</a>
+                            </li>
+                        
+                    </ul>
+                </div>
+            </div>
+
+            
+            
+            
+
+        </div>
+    </section>
+
+
+
+        <!-- start of footer -->
+        <footer>
+            <div class="container">
+                <div class="section">
+                    <div class="row justify-content-center align-items-center">
+                        <div class="col-xl-6 col-lg-8 col-md-10"></div>
+                    </div>
+                </div>
+                <div class="pb-5">
+                    <div class="row g-2 g-lg-4 align-items-center">
+                        <div class="col-lg-6 text-center text-lg-start">
+                            <p class="mb-0 copyright-text content">©2022 @ Nhan.PT</p>
+                        </div>
+                        <div class="col-lg-6 text-center text-lg-end">
+                            <ul class="list-inline footer-menu">
+                                <li class="list-inline-item m-0">
+                                    <a href="https://nhan.pt">Home Page</a>
+                                </li>
+                                <li class="list-inline-item m-0">
+                                    <a href="https://help-14.com">Help-14</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- end of footer -->
+
+        <!-- JS Plugins -->
+        <script src="/jquery/jquery.min.js"></script>
+        <script src="/bootstrap/bootstrap.min.js"></script>
+        <script src="/lightense/lightense.min.js"></script>
+
+        <!-- Main Script -->
+        <script src="/js/script.js"></script>
+    
+
+</body></html>
