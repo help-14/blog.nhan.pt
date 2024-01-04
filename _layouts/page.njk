@@ -99,7 +99,7 @@
             </div>
 
             {% set combineTag = tags | join(' ') %}
-            {% set relatedPosts = search.pages(combineTag, "date=desc", 3) %}
+            {% set relatedPosts = search.pages(combineTag, "timestamp=desc", 3) %}
             {% if (relatedPosts.length > 1) %}
                 <div class="single-post-similer">
                     <div class="row justify-content-center">
