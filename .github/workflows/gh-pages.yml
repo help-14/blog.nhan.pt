@@ -19,10 +19,10 @@ jobs:
 
       - name: Build site
         run: |
-          deno run -A https://deno.land/x/lume/ci.ts
+          deno run -A https://deno.land/x/lume@v1.15.3/ci.ts
 
       - name: Deploy
-        uses: crazy-max/ghaction-github-pages@v2.0.1
+        uses: crazy-max/ghaction-github-pages@v4.0.0
         with:
           build_dir: _site
         env:
