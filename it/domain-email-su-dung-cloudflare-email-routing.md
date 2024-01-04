@@ -2,14 +2,13 @@
 layout: page.njk
 title: Sử dụng Domain Email miễn phí bằng Cloudflare Email Routing
 description: Tạo miễn phí email cá nhân bằng tên miền có sẵn của bạn hoàn toàn miễn phí
-cover: https://cf-assets.www.cloudflare.com/slt3lc6tev37/7lVVVVEB2RUncxomRJHLny/7c497b8d6fee9121d03fac508e850114/BDES-5040_-_Email-Forwarding-Paper-Plane.svg
+cover: https://www.macobserver.com/wp-content/uploads/2021/09/cloudflare-email-wizard.jpg
 author: Phan Nhan
 time: 01/04/2024
 timestamp: 1704338094683
 tags:
   - it
 ---
-
 Hiện tại mình đang có sửa dụng 3 email trên Cloudflare, chắc không cần nói thêm nhiều về dịch vụ Cloudflare nữa rồi nhỉ, vừa bảo vệ ddos cho website của bạn, vừa quản lý domain, chi phí domain rẻ, dịch vụ phần lớn là miễn phí. Cloudflare hiện tại cho phép bạn forward Email bất kỳ gửi đến tên miền của bạn tới một email cá nhân khác hoàn toàn miễn phí nhưng không cho phép gửi Email đi. Trong bài viết này mình sẽ hướng dẫn bạn cách cài đặt Cloudflare là Gmail để có thể gửi nhận Email hai chiều y như dịch vụ trả tiền Google Workspace vậy.
 
 ## Cài đặt Cloudflare Email Routing
